@@ -1,5 +1,5 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script>
+import { RouterLink, RouterView } from "vue-router"
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from "vue-router";
       <RouterLink to="/contracts" class="navigation__item">Contracts</RouterLink>
       <RouterLink to="/details" class="navigation__item">Details</RouterLink>
     </nav>
-    <div>log In</div>
+    <RouterLink to="/login" class="header__log-in">Log in</RouterLink>
   </header>
 </template>
 
@@ -18,13 +18,15 @@ import { RouterLink, RouterView } from "vue-router";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 32px;
+  padding: 0px 32px;
 }
 .header__logo {
   display: flex;
   align-items: center;
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
+  font-weight: var(--weight-semi-bold);
   gap: 12px;
+  color: var(--color-logo);
 }
 
 .navigation {
@@ -33,5 +35,12 @@ import { RouterLink, RouterView } from "vue-router";
 }
 .navigation__item {
   padding: 27px 16px;
+}
+
+.header__log-in {
+  border-radius: 10px;
+  background: var(--background-accent-gradient);
+  padding: 15px;
+  color: var(--color-buttons);
 }
 </style>

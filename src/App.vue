@@ -1,7 +1,8 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-import Header from "./components/Header.vue";
+import { RouterLink, RouterView } from "vue-router"
+import HelloWorld from "./components/HelloWorld.vue"
+import Header from "./components/Header.vue"
+import Footer from "./components/Footer.vue"
 </script>
 
 <template>
@@ -20,10 +21,14 @@ import Header from "./components/Header.vue";
 
   <Header />
 
-  <!-- <RouterView /> -->
+  <RouterView class="main" />
+  <Footer />
 </template>
 
 <style scoped>
+.main {
+  min-height: calc(100vh - 144px);
+}
 /* header {
   line-height: 1.5;
   max-height: 100vh;

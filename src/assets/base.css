@@ -31,9 +31,19 @@
   --color-border-hover: var(--vt-c-divider-light-1);
 
   --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+
+  --color-background-footer: #4d4d4d;
+  --color-logo: #121212;
+  --color-text: #2c2c2c;
+  --color-accent: #fb8f42;
+  --color-buttons: var(--vt-c-white);
+  --background-accent-gradient: linear-gradient(0.4turn, #eec595, #f1804f, #edd098);
 
   --section-gap: 160px;
+
+  --weight-semi-bold: 600;
+  --weight-medium: 500;
+  --weight-light: 400;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -55,7 +65,7 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-weight: normal;
+  font-weight: var(--weight-medium);
 }
 
 body {
@@ -65,21 +75,9 @@ body {
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    sans-serif;
-  font-size: 15px;
+  line-height: 1.125;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
