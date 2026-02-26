@@ -1,8 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router"
-import HelloWorld from "./components/HelloWorld.vue"
-import Header from "./components/Header.vue"
-import Footer from "./components/Footer.vue"
+import Header from "./components/TheHeader.vue"
+import Footer from "./components/TheFooter.vue"
 </script>
 
 <template>
@@ -21,12 +20,15 @@ import Footer from "./components/Footer.vue"
 
   <Header />
 
-  <RouterView class="main" />
+  <main class="main">
+    <RouterView />
+  </main>
   <Footer />
 </template>
 
 <style scoped>
 .main {
+  padding: 32px 20px;
   min-height: calc(100vh - 144px);
 }
 /* header {

@@ -9,7 +9,12 @@
   --vt-c-black-mute: #282828;
 
   --vt-c-indigo: #2c3e50;
+  --vt-c-soft-grey: #565656;
 
+  --vt-c-white-dark: #fdfdfd;
+  --vt-c-grey: #dfdfdf;
+  --vt-c-light-grey: #fafafa;
+  --vt-c-black-soft: #474747;
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
   --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
@@ -23,21 +28,31 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
+  --color-background: var(--vt-c-white-dark);
+  --color-background-header: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
-
+  --color-background-hover: var(--vt-c-grey);
+  --color-background-card: var(--vt-c-light-grey);
   --color-border: var(--vt-c-divider-light-2);
   --color-border-hover: var(--vt-c-divider-light-1);
 
   --color-heading: var(--vt-c-text-light-1);
 
   --color-background-footer: #4d4d4d;
+  --color-border-card: #d6d6d6;
+  --color-input-text: var(--vt-c-soft-grey);
   --color-logo: #121212;
   --color-text: #2c2c2c;
   --color-accent: #fb8f42;
   --color-buttons: var(--vt-c-white);
-  --background-accent-gradient: linear-gradient(0.4turn, #eec595, #f1804f, #edd098);
+  --background-accent-gradient: linear-gradient(
+    144deg,
+    #eec595 0%,
+    #f1804f 50%,
+    #f1804f 55%,
+    #edd098 100%
+  );
 
   --section-gap: 160px;
 
@@ -86,4 +101,23 @@ body {
 a {
   text-decoration: none;
   color: inherit;
+}
+input,
+button,
+select {
+  background-color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input,
+button,
+select:focus {
+  outline: none;
+}
+
+input,
+button,
+select:focus-visible {
+  outline: none;
 }

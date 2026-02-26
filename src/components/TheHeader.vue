@@ -18,7 +18,9 @@ import { RouterLink, RouterView } from "vue-router"
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: var(--color-background-header);
   padding: 0px 32px;
+  border-bottom: 1px solid #c0c0c0;
 }
 .header__logo {
   display: flex;

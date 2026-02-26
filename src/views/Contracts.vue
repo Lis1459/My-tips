@@ -1,2 +1,4 @@
 <script></script>
-<template></template>
+<template>
+  <div>Contracts</div>
+</template>
