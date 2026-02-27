@@ -3,7 +3,8 @@ import BaseButton from "@/components/ui/BaseButton.vue"
 import BaseCard from "@/components/ui/BaseCard.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
 import BaseSelect from "@/components/ui/BaseSelect.vue"
-import { login } from "@/logic/apiService"
+import router from "@/router"
+import store from "@/store"
 
 export default {
   components: {
@@ -21,14 +22,9 @@ export default {
   methods: {
     async handleClick(evt) {
       try {
-        const responce = login(this.username, this.password)
-        if (!responce.ok) {
-          console.log(responce)
-        }
-      } catch (error) {
-        console.log(error.message)
-      }
-      console.log("clicked ")
+        store.dispatch("login", { username: this.username, password: this.password })
+        router.push("/")
+      } catch (error) {}
     },
   },
 }
