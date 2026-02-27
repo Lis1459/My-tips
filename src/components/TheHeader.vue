@@ -21,6 +21,7 @@ import { RouterLink, RouterView } from "vue-router"
   background-color: var(--color-background-header);
   padding: 0px 32px;
   border-bottom: 1px solid #c0c0c0;
+  height: 72px;
 }
 .header__logo {
   display: flex;

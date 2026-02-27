@@ -5,6 +5,9 @@ export default {
     variant: {
       type: String,
       default: "primary",
+      validator(value) {
+        return ["primary", "secondary"].includes(value)
+      },
     },
     type: {
       type: String,

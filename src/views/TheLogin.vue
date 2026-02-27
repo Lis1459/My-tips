@@ -3,6 +3,7 @@ import BaseButton from "@/components/ui/BaseButton.vue"
 import BaseCard from "@/components/ui/BaseCard.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
 import BaseSelect from "@/components/ui/BaseSelect.vue"
+import { login } from "@/logic/apiService"
 
 export default {
   components: {
@@ -13,16 +14,20 @@ export default {
   },
   data() {
     return {
-      email: "",
+      username: "",
       password: "",
-      options: [
-        { value: "nigga", label: "Nigger", isSelected: true },
-        { value: "putin", label: "Vova", isSelected: false },
-      ],
     }
   },
   methods: {
-    handleClick(evt) {
+    async handleClick(evt) {
+      try {
+        const responce = login(this.username, this.password)
+        if (!responce.ok) {
+          console.log(responce)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
       console.log("clicked ")
     },
   },
@@ -34,15 +39,15 @@ export default {
     <BaseCard>
       <form @submit.prevent="handleClick" class="form">
         <div class="form__input-group">
-          <label for="email" class="input-group__label">Email</label>
+          <label for="username" class="input-group__label">Username</label>
           <!-- <div> -->
           <BaseInput
-            v-model="email"
-            placeholder="example@gmail.com"
-            name="email"
-            type="email"
-            id="email"
+            v-model="username"
+            placeholder="User"
+            name="username"
+            id="username"
             autocomplete
+            reqired
           />
           <!-- </div> -->
         </div>
@@ -56,6 +61,7 @@ export default {
             type="password"
             id="password"
             autocomplete
+            reqired
           />
           <!-- </div> -->
         </div>
@@ -67,8 +73,9 @@ export default {
 
 <style scoped>
 .login {
-  width: fit-content;
-  margin: 0px auto;
+  width: 100%;
+  max-width: 550px;
+  padding: 32px 20px;
   display: flex;
   flex-direction: column;
   gap: 32px;
