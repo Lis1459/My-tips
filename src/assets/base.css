@@ -47,7 +47,7 @@
   --color-accent: #fb8f42;
   --color-buttons: var(--vt-c-white);
   --background-accent-gradient: linear-gradient(
-    144deg,
+    to bottom right,
     #eec595 0%,
     #f1804f 50%,
     #f1804f 55%,
