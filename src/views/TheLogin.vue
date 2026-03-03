@@ -17,14 +17,17 @@ export default {
     return {
       username: "",
       password: "",
+      error: null,
     }
   },
   methods: {
     async handleClick(evt) {
       try {
-        store.dispatch("login", { username: this.username, password: this.password })
+        await store.dispatch("login", { username: this.username, password: this.password })
         router.push("/")
-      } catch (error) {}
+      } catch (error) {
+        this.error = error.message
+      }
     },
   },
 }
@@ -63,6 +66,7 @@ export default {
         </div>
         <BaseButton type="submit">Submit</BaseButton>
       </form>
+      <p v-if="error" class="form__error">{{ error }}</p>
     </BaseCard>
   </div>
 </template>
@@ -92,6 +96,12 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.form__error {
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
 }
 
 /* .input-group__label {
