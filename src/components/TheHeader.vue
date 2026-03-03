@@ -1,7 +1,11 @@
 <script>
 import store from "@/store"
 import { RouterLink, RouterView } from "vue-router"
+import BaseButton from "./ui/BaseButton.vue"
 export default {
+  components: {
+    BaseButton,
+  },
   computed: {
     isAuthenticated() {
       return store.getters.isAuthenticated
@@ -15,6 +19,9 @@ export default {
         console.log(error.message)
       }
     },
+    handleLogin() {
+      this.$router.push("/login")
+    },
   },
 }
 </script>
@@ -26,8 +33,10 @@ export default {
       <RouterLink to="/contracts" class="navigation__item">Contracts</RouterLink>
       <RouterLink to="/details" class="navigation__item">Details</RouterLink>
     </nav>
-    <RouterLink to="/login" class="header__button" v-if="!isAuthenticated">Log in</RouterLink>
-    <button class="header__button header__log-out" v-else @click="handleLogout">Log out</button>
+    <BaseButton variant="accent" @click="handleLogin" v-if="!isAuthenticated">Log in</BaseButton>
+    <BaseButton variant="accent" class="header__log-out" v-else @click="handleLogout"
+      >Log out</BaseButton
+    >
     <!-- <button class="header__button header__log-out" v-else>Log out</button> -->
   </header>
 </template>
@@ -59,18 +68,8 @@ export default {
   padding: 27px 16px;
 }
 
-.header__button {
-  position: relative;
-  cursor: pointer;
-  line-height: 18px;
-  border: none;
-  border-radius: 10px;
-  background: var(--background-accent-gradient);
-  padding: 15px 16px;
-  color: var(--color-buttons);
-}
-
 .header__log-out {
+  position: relative;
   padding-left: 64px;
 }
 

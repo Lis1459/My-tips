@@ -6,8 +6,11 @@ export default {
       type: String,
       default: "primary",
       validator(value) {
-        return ["primary", "secondary"].includes(value)
+        return ["primary", "secondary", "accent"].includes(value)
       },
+    },
+    class: {
+      type: String,
     },
     type: {
       type: String,
@@ -25,7 +28,7 @@ export default {
   },
   computed: {
     buttonClasses() {
-      return ["button", `button-${this.variant}`]
+      return ["button", `button-${this.variant}`, `${this.class}`]
     },
   },
 }
@@ -59,6 +62,15 @@ export default {
 .button-secondary {
   color: var(--vt-c-black-soft);
   border: 2px solid var(--vt-c-black-soft);
+}
+
+.button-accent {
+  line-height: 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--background-accent-gradient);
+  padding: 15px 16px;
+  color: var(--color-buttons);
 }
 
 .button-primary:focus {
