@@ -1,5 +1,4 @@
 <script>
-import store from "@/store"
 import { RouterLink, RouterView } from "vue-router"
 import BaseButton from "./ui/BaseButton.vue"
 export default {
@@ -8,13 +7,14 @@ export default {
   },
   computed: {
     isAuthenticated() {
-      return store.getters.isAuthenticated
+      return this.$store.getters.isAuthenticated
     },
   },
   methods: {
     handleLogout(evt) {
       try {
-        store.dispatch("logout")
+        this.$store.dispatch("logout")
+        this.$router.push("/")
       } catch (error) {
         console.log(error.message)
       }

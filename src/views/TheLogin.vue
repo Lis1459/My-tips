@@ -4,7 +4,6 @@ import BaseCard from "@/components/ui/BaseCard.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
 import BaseSelect from "@/components/ui/BaseSelect.vue"
 import router from "@/router"
-import store from "@/store"
 
 export default {
   components: {
@@ -23,7 +22,7 @@ export default {
   methods: {
     async handleClick(evt) {
       try {
-        await store.dispatch("login", { username: this.username, password: this.password })
+        await this.$store.dispatch("login", { username: this.username, password: this.password })
         router.push("/")
       } catch (error) {
         this.error = error.message
@@ -82,6 +81,7 @@ export default {
 }
 
 .login__header {
+  font-weight: 600;
   font-size: 30px;
   line-height: 45px;
 }
@@ -103,8 +103,4 @@ export default {
   color: red;
   font-size: 14px;
 }
-
-/* .input-group__label {
-  font-size: 14px;
-} */
 </style>

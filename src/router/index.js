@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import TheDetails from "@/views/TheDetails.vue"
 import TheLogin from "@/views/TheLogin.vue"
+import AddContractPage from "@/views/AddContractPage.vue"
 import store from "@/store"
 
 const router = createRouter({
@@ -30,6 +31,12 @@ const router = createRouter({
       path: "/login",
       name: "login",
       component: TheLogin,
+    },
+    {
+      path: "/add",
+      name: "add contract",
+      component: AddContractPage,
+      meta: { requiresAuth: true },
     },
   ],
 })

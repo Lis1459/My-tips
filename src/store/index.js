@@ -4,11 +4,13 @@ export default createStore({
   state: {
     user: null,
     token: localStorage.getItem("token") || null,
+    contracts: [],
   },
 
   getters: {
     isAuthenticated: (state) => !!state.token,
     getUser: (state) => state.user,
+    getContracts: (state) => state.contracts || [],
   },
 
   mutations: {
@@ -18,6 +20,9 @@ export default createStore({
 
     SET_TOKEN(state, token) {
       state.token = token
+    },
+    SET_CONTRACTS(state, contracts) {
+      state.contracts = contracts
     },
     LOGOUT(state) {
       state.user = null
@@ -50,6 +55,17 @@ export default createStore({
       }
     },
 
+    async fetchContracts({ commit }) {
+      try {
+        const response = await fetch("https://dummyjson.com/c/61ad-93ce-4b06-8288")
+        const data = await response.json()
+        // endpoint returns { contracts: [...] }
+        commit("SET_CONTRACTS", data.contracts || [])
+      } catch (error) {
+        console.error("Failed to load contracts", error)
+        commit("SET_CONTRACTS", [])
+      }
+    },
     logout({ commit }) {
       commit("LOGOUT")
       localStorage.removeItem("token")

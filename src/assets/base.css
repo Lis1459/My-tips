@@ -56,6 +56,12 @@
 
   --section-gap: 160px;
 
+  /* status badge colors */
+  --status-error: #fbecee;
+  --status-active: #ecf8f7;
+  --status-expired: #f4ecfb;
+  --status-suspended: #f3f8ec;
+
   --weight-semi-bold: 600;
   --weight-medium: 500;
   --weight-light: 400;
