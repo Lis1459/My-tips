@@ -37,6 +37,7 @@ export default {
   /* height: 54px; */
   appearance: none;
   background: none;
+  width: 100%;
 }
 
 .select-wrapper {

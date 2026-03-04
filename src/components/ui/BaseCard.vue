@@ -1,10 +1,16 @@
 <script>
 export default {
   name: "Card",
+  props: ["class"],
+  computed: {
+    cardClasees() {
+      return ["card", this.class]
+    },
+  },
 }
 </script>
 <template>
-  <div class="card">
+  <div :class="cardClasees">
     <slot></slot>
   </div>
 </template>
