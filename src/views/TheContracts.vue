@@ -98,7 +98,7 @@ export default {
 <style scoped>
 .contracts {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1320px;
   padding: 32px 20px;
   display: flex;
   flex-direction: column;

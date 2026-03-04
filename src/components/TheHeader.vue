@@ -28,7 +28,7 @@ export default {
 
 <template>
   <header class="header">
-    <div class="header__logo"><img src="../assets/logo.svg" alt="logo" />TipMinder</div>
+    <div class="header__logo"><img src="../assets/LogoIcon.svg" alt="logo" />TipMinder</div>
     <nav class="navigation">
       <RouterLink to="/contracts" class="navigation__item">Contracts</RouterLink>
       <RouterLink to="/details" class="navigation__item">Details</RouterLink>
@@ -37,7 +37,6 @@ export default {
     <BaseButton variant="accent" class="header__log-out" v-else @click="handleLogout"
       >Log out</BaseButton
     >
-    <!-- <button class="header__button header__log-out" v-else>Log out</button> -->
   </header>
 </template>
 
@@ -74,7 +73,7 @@ export default {
 }
 
 .header__log-out::before {
-  content: url(../assets/profile.svg);
+  content: url(../assets/ProfileIcon.svg);
   position: absolute;
   left: 16px;
   top: 50%;
@@ -91,5 +90,25 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .navigation__item {
+    padding: 12px 0;
+  }
 }
 </style>
