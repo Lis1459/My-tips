@@ -2,7 +2,7 @@
 export default {
   name: "Input",
   props: {
-    reqired: {
+    required: {
       type: Boolean,
     },
     autocomplete: {
@@ -10,7 +10,7 @@ export default {
     },
     modelValue: {
       type: String,
-      reqired: true,
+      required: true,
     },
     type: {
       type: String,
@@ -39,7 +39,7 @@ export default {
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     :autocomplete="isAutocomplete"
-    :required="reqired"
+    :required="required"
   />
 </template>
 

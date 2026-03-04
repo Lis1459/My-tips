@@ -22,12 +22,16 @@ export default {
   },
   methods: {
     handleEdit(contract) {
-      console.log("edit", contract)
-      alert(`Edit contract ${contract.contractNumber}`)
+      // navigate to edit page for this contract
+      this.$router.push(`/${contract.id}/edit`)
     },
-    handleDelete(contract) {
-      console.log("delete", contract)
-      alert(`Delete contract ${contract.contractNumber}`)
+    async handleDelete(contract) {
+      if (!confirm(`Delete contract ${contract.contractNumber}?`)) return
+      try {
+        await this.$store.dispatch("deleteContract", contract.id)
+      } catch (e) {
+        console.error("Failed to delete contract", e)
+      }
     },
     handleAdd() {
       this.$router.push("/add")
@@ -46,9 +50,9 @@ export default {
         <div class="contracts-grid">
           <div class="contracts-grid__row contracts-grid__row--head">
             <div class="contracts-grid__cell contracts-grid__cell--number">Number</div>
-            <div class="contracts-grid__cell">Card number</div>
+            <div class="contracts-grid__cell">Contract number</div>
             <div class="contracts-grid__cell">Status</div>
-            <div class="contracts-grid__cell">Valid till</div>
+            <div class="contracts-grid__cell">Date from</div>
             <div class="contracts-grid__cell">Action</div>
           </div>
           <div class="contracts-grid__body">

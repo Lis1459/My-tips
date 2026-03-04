@@ -1,26 +1,36 @@
 <script>
 export default {
   name: "Select",
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: String,
-      reqired: true,
     },
     placeholder: String,
-    options: Array,
+    options: {
+      type: Array,
+    },
+
+    name: String,
   },
   emits: ["update:modelValue"],
 }
 </script>
+
 <template>
   <div class="select-wrapper">
     <select
+      :name="name"
       class="select"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      :value="modelValue || ''"
+      @change="$emit('update:modelValue', $event.target.value)"
+      v-bind="$attrs"
     >
-      <option value="" selected hidden>{{ placeholder }}</option>
-      <option v-for="option in this.options" :value="option.value" :selected="option.isSelected">
+      <option disabled value="" hidden>
+        {{ placeholder }}
+      </option>
+
+      <option v-for="option in options" :key="option.value" :value="option.value">
         {{ option.label }}
       </option>
     </select>
@@ -34,7 +44,6 @@ export default {
   color: var(--color-input-text);
   border-radius: 10px;
   line-height: 20px;
-  /* height: 54px; */
   appearance: none;
   background: none;
   width: 100%;
