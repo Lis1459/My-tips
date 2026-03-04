@@ -65,7 +65,6 @@ export default createStore({
           body: JSON.stringify(credentials),
         })
         const data = await responce.json()
-        console.log(data)
         if (!responce.ok) {
           throw new Error(data.message || "Login failed")
         }

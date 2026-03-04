@@ -61,9 +61,6 @@ export default {
       const c = contracts.find((x) => String(x.id) === String(id))
       if (c) {
         this.form = { ...c }
-        console.log(this.form)
-        console.log(this.form.contractNumber)
-        console.log(this.contractOptions.map((o) => o.value))
       }
     }
   },
