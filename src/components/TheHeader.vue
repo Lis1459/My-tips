@@ -16,7 +16,7 @@ export default {
         this.$store.dispatch("logout")
         this.$router.push("/login")
       } catch (error) {
-        console.log(error.message)
+        console.error(error.message)
       }
     },
     handleLogin() {

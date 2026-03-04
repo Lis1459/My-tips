@@ -41,7 +41,6 @@ export default {
 
         const dateObj = new Date(tip.date)
         if (isNaN(dateObj)) {
-          console.log(tip.date)
           return
         }
 
@@ -69,7 +68,6 @@ export default {
         grouped[key].total += parseFloat(tip.amount)
         grouped[key].count++
       })
-      console.log(grouped)
 
       return Object.keys(grouped)
         .sort()
