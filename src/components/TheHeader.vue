@@ -1,19 +1,18 @@
 <script>
-import { RouterLink, RouterView } from "vue-router"
+import { mapActions, mapGetters } from "vuex/dist/vuex.cjs.js"
 import BaseButton from "./ui/BaseButton.vue"
 export default {
   components: {
     BaseButton,
   },
   computed: {
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated
-    },
+    ...mapGetters(["isAuthenticated"]),
   },
   methods: {
-    handleLogout(evt) {
+    ...mapActions(["logout"]),
+    handleLogout() {
       try {
-        this.$store.dispatch("logout")
+        this.logout()
         this.$router.push("/login")
       } catch (error) {
         console.error(error.message)
@@ -28,7 +27,7 @@ export default {
 
 <template>
   <header class="header">
-    <div class="header__logo"><img src="../assets/LogoIcon.svg" alt="logo" />TipMinder</div>
+    <div class="header__logo"><img src="../assets/icons/LogoIcon.svg" alt="logo" />TipMinder</div>
     <nav class="navigation">
       <RouterLink to="/contracts" class="navigation__item">Contracts</RouterLink>
       <RouterLink to="/details" class="navigation__item">Details</RouterLink>
@@ -73,7 +72,7 @@ export default {
 }
 
 .header__log-out::before {
-  content: url(../assets/ProfileIcon.svg);
+  content: url(../assets/icons/ProfileIcon.svg);
   position: absolute;
   left: 16px;
   top: 50%;

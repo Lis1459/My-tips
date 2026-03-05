@@ -3,7 +3,7 @@ import BaseCard from "@/components/ui/BaseCard.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
 import BaseSelect from "@/components/ui/BaseSelect.vue"
 import BaseButton from "@/components/ui/BaseButton.vue"
-import StatusBadge from "@/components/ui/StatusBadge.vue"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   name: "AddContractPage",
@@ -12,8 +12,12 @@ export default {
     BaseInput,
     BaseSelect,
     BaseButton,
-    StatusBadge,
   },
+
+  computed: {
+    ...mapGetters(["getContracts"]),
+  },
+
   data() {
     return {
       isEditing: false,
@@ -30,12 +34,14 @@ export default {
         bankAccountNumber: "",
         dateFrom: "",
       },
+
       feeOptions: [
         { label: "Active", value: "Active", isSelected: false },
         { label: "Suspended", value: "Suspended", isSelected: false },
         { label: "Expired", value: "Expired", isSelected: false },
         { label: "Error", value: "Error", isSelected: false },
       ],
+
       contractOptions: [
         { label: "CTR-1001", value: "CTR-1001", isSelected: false },
         { label: "CTR-1002", value: "CTR-1002", isSelected: false },
@@ -52,32 +58,36 @@ export default {
       ],
     }
   },
+
   async mounted() {
     const id = this.$route.params.id
     if (id) {
       this.isEditing = true
       this.editingId = id
-      const contracts = this.$store.getters.getContracts || []
+      const contracts = this.getContracts || []
       const c = contracts.find((x) => String(x.id) === String(id))
       if (c) {
         this.form = { ...c }
       }
     }
   },
+
   methods: {
+    ...mapActions(["updateContract", "addContract"]),
     async handleSignContract() {
       try {
         if (this.isEditing) {
-          await this.$store.dispatch("updateContract", this.form)
+          await this.updateContract(this.form)
         } else {
           if (!this.form.id) this.form.id = Date.now().toString()
-          await this.$store.dispatch("addContract", this.form)
+          await this.addContract(this.form)
         }
         this.$router.push("/contracts")
       } catch (e) {
         console.error("Failed to save contract", e)
       }
     },
+
     handleBack() {
       this.$router.back()
     },

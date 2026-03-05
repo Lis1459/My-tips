@@ -2,14 +2,13 @@
 import BaseButton from "@/components/ui/BaseButton.vue"
 import BaseCard from "@/components/ui/BaseCard.vue"
 import BaseInput from "@/components/ui/BaseInput.vue"
-import BaseSelect from "@/components/ui/BaseSelect.vue"
 import router from "@/router"
+import { mapActions } from "vuex"
 
 export default {
   components: {
     BaseInput,
     BaseButton,
-    BaseSelect,
     BaseCard,
   },
   data() {
@@ -20,9 +19,10 @@ export default {
     }
   },
   methods: {
-    async handleClick(evt) {
+    ...mapActions(["login"]),
+    async handleClick() {
       try {
-        await this.$store.dispatch("login", { username: this.username, password: this.password })
+        await this.login({ username: this.username, password: this.password })
         router.push("/")
       } catch (error) {
         this.error = error.message
@@ -38,20 +38,17 @@ export default {
       <form @submit.prevent="handleClick" class="form">
         <div class="form__input-group">
           <label for="username" class="input-group__label">Username</label>
-          <!-- <div> -->
           <BaseInput
             v-model="username"
             placeholder="User"
             name="username"
             id="username"
             autocomplete
-            reqired
+            required
           />
-          <!-- </div> -->
         </div>
         <div class="form__input-group">
           <label for="password" class="input-group__label">Password</label>
-          <!-- <div> -->
           <BaseInput
             v-model="password"
             placeholder="**********"
@@ -59,9 +56,8 @@ export default {
             type="password"
             id="password"
             autocomplete
-            reqired
+            required
           />
-          <!-- </div> -->
         </div>
         <BaseButton type="submit">Submit</BaseButton>
       </form>
