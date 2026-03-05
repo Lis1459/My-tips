@@ -8,7 +8,7 @@ export default {
     linkUrl: { type: String, default: "#" },
   },
   methods: {
-    handleLinkClick(event) {
+    handleLinkClick() {
       this.$emit("click", { url: this.linkUrl })
     },
   },
@@ -28,7 +28,7 @@ export default {
           class="stats-card__link"
           @click.prevent="handleLinkClick"
           >{{ linkText }}</a
-        ><img src="../assets/ArrowIcon.svg" alt="Arrow icon" />
+        ><img src="../../assets/icons/ArrowIcon.svg" alt="Arrow icon" />
       </div>
     </div>
   </div>

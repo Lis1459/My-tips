@@ -1,6 +1,6 @@
 <script>
-import { mapGetters } from "vuex"
-import StatsCard from "@/components/StatsCard.vue"
+import { mapGetters, mapActions } from "vuex"
+import StatsCard from "@/components//ui/StatsCard.vue"
 import * as echarts from "echarts"
 import BaseCard from "@/components/ui/BaseCard.vue"
 import BaseButton from "@/components/ui/BaseButton.vue"
@@ -12,16 +12,16 @@ export default {
     BaseCard,
     BaseButton,
   },
+
   data() {
     return {
       viewBy: "Days",
       chartInstance: null,
     }
   },
+
   computed: {
-    getTips() {
-      return this.$store.getters.getTips
-    },
+    ...mapGetters(["getTips"]),
     tips() {
       return this.getTips || []
     },
@@ -78,7 +78,7 @@ export default {
     },
   },
   async mounted() {
-    await this.$store.dispatch("fetchTips")
+    await this.fetchTips()
     this.initChart()
   },
 
@@ -91,6 +91,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["fetchTips"]),
     initChart() {
       const chartDom = this.$refs.chart
       if (!chartDom) return

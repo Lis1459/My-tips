@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Card",
+  name: "BaseCard",
   props: ["class"],
   computed: {
     cardClasees() {

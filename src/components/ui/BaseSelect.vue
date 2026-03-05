@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Select",
+  name: "BaseSelect",
   inheritAttrs: false,
   props: {
     modelValue: {

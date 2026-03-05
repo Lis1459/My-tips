@@ -1,5 +1,5 @@
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 import BaseButton from "@/components/ui/BaseButton.vue"
 import StatusBadge from "@/components/ui/StatusBadge.vue"
 
@@ -10,25 +10,23 @@ export default {
     StatusBadge,
   },
   computed: {
-    getContracts() {
-      return this.$store.getters.getContracts
-    },
+    ...mapGetters(["getContracts"]),
     contracts() {
       return this.getContracts || []
     },
   },
   async mounted() {
-    await this.$store.dispatch("fetchContracts")
+    await this.fetchContracts()
   },
   methods: {
+    ...mapActions(["fetchContracts", "deleteContract"]),
     handleEdit(contract) {
-      // navigate to edit page for this contract
       this.$router.push(`/${contract.id}/edit`)
     },
     async handleDelete(contract) {
       if (!confirm(`Delete contract ${contract.contractNumber}?`)) return
       try {
-        await this.$store.dispatch("deleteContract", contract.id)
+        await this.deleteContract(contract.id)
       } catch (e) {
         console.error("Failed to delete contract", e)
       }
@@ -79,11 +77,14 @@ export default {
 
               <div class="contracts-grid__cell contracts-grid__cell--actions">
                 <BaseButton variant="accent" @click="handleEdit(contract)" class="action-button">
-                  <img src="../assets/EditIcon.svg" alt="Edit icon" class="action-buttons__icon"
+                  <img
+                    src="../assets/icons/EditIcon.svg"
+                    alt="Edit icon"
+                    class="action-buttons__icon"
                 /></BaseButton>
                 <BaseButton variant="accent" @click="handleDelete(contract)" class="action-button">
                   <img
-                    src="../assets/DeleteIcon.svg"
+                    src="../assets/icons/DeleteIcon.svg"
                     alt="Delete icon"
                     class="action-buttons__icon"
                   />

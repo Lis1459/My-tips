@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "Input",
+  name: "BaseInput",
   props: {
     required: {
       type: Boolean,
