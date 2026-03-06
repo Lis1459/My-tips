@@ -25,26 +25,18 @@ export default createStore({
     },
     SET_CONTRACTS(state, contracts) {
       state.contracts = contracts
-
-      localStorage.setItem("contracts", JSON.stringify(state.contracts))
     },
     ADD_CONTRACT(state, contract) {
       state.contracts.push(contract)
-
-      localStorage.setItem("contracts", JSON.stringify(state.contracts))
     },
     UPDATE_CONTRACT(state, updated) {
       const idx = state.contracts.findIndex((c) => c.id === updated.id)
       if (idx !== -1) {
         state.contracts.splice(idx, 1, updated)
       }
-
-      localStorage.setItem("contracts", JSON.stringify(state.contracts))
     },
     REMOVE_CONTRACT(state, id) {
       state.contracts = state.contracts.filter((c) => c.id !== id)
-
-      localStorage.setItem("contracts", JSON.stringify(state.contracts))
     },
     SET_TIPS(state, tips) {
       state.tips = tips
@@ -58,29 +50,25 @@ export default createStore({
 
   actions: {
     async login({ commit }, credentials) {
-      try {
-        const responce = await fetch("https://dummyjson.com/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(credentials),
-        })
-        const data = await responce.json()
-        if (!responce.ok) {
-          throw new Error(data.message || "Login failed")
-        }
-
-        commit("SET_USER", data)
-        commit("SET_TOKEN", data.accessToken)
-
-        localStorage.setItem("token", data.accessToken)
-
-        return true
-      } catch (error) {
-        throw error
+      const responce = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(credentials),
+      })
+      if (!responce.ok) {
+        throw new Error(data.message || "Login failed")
       }
+      const data = await responce.json()
+
+      commit("SET_USER", data)
+      commit("SET_TOKEN", data.accessToken)
+
+      localStorage.setItem("token", data.accessToken)
+
+      return true
     },
 
-    async fetchContracts({ commit }) {
+    async fetchContracts({ commit, state }) {
       try {
         const current = JSON.parse(localStorage.getItem("contracts") || "null")
         if (Array.isArray(current)) {
@@ -93,19 +81,26 @@ export default createStore({
       } catch (error) {
         console.error("Failed to load contracts", error)
         commit("SET_CONTRACTS", [])
+      } finally {
+        localStorage.setItem("contracts", JSON.stringify(state.contracts))
       }
     },
-    async addContract({ commit }, contract) {
+
+    async addContract({ commit, state }, contract) {
       if (!contract.id) contract.id = Date.now().toString()
       commit("ADD_CONTRACT", contract)
+      localStorage.setItem("contracts", JSON.stringify(state.contracts))
       return contract
     },
-    async updateContract({ commit }, contract) {
+    async updateContract({ commit, state }, contract) {
       commit("UPDATE_CONTRACT", contract)
+      localStorage.setItem("contracts", JSON.stringify(state.contracts))
+
       return contract
     },
-    async deleteContract({ commit }, id) {
+    async deleteContract({ commit, state }, id) {
       commit("REMOVE_CONTRACT", id)
+      localStorage.setItem("contracts", JSON.stringify(state.contracts))
       return true
     },
     async fetchTips({ commit }) {

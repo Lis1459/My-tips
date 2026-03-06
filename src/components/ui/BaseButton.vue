@@ -9,9 +9,6 @@ export default {
         return ["primary", "secondary", "accent"].includes(value)
       },
     },
-    class: {
-      type: String,
-    },
     type: {
       type: String,
       default: "button",
@@ -28,7 +25,7 @@ export default {
   },
   computed: {
     buttonClasses() {
-      return ["button", `button-${this.variant}`, `${this.class}`]
+      return ["button", `button-${this.variant}`]
     },
   },
 }

@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapGetters } from "vuex/dist/vuex.cjs.js"
+import { mapActions, mapGetters } from "vuex"
 import BaseButton from "./ui/BaseButton.vue"
 export default {
   components: {
