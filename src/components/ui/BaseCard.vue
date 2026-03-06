@@ -1,16 +1,10 @@
 <script>
 export default {
   name: "BaseCard",
-  props: ["class"],
-  computed: {
-    cardClasees() {
-      return ["card", this.class]
-    },
-  },
 }
 </script>
 <template>
-  <div :class="cardClasees">
+  <div class="card">
     <slot></slot>
   </div>
 </template>

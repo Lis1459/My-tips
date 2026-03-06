@@ -37,7 +37,7 @@ export default {
       const grouped = {}
 
       this.tips.forEach((tip) => {
-        if (!tip.date || !tip.amount == null) return
+        if (!tip.date || tip.amount == null) return
 
         const dateObj = new Date(tip.date)
         if (isNaN(dateObj)) {
@@ -92,6 +92,7 @@ export default {
   },
   methods: {
     ...mapActions(["fetchTips"]),
+
     initChart() {
       const chartDom = this.$refs.chart
       if (!chartDom) return
@@ -197,6 +198,7 @@ export default {
       }
       this.chartInstance.setOption(option)
     },
+
     changeView(mode) {
       this.viewBy = mode
     },
